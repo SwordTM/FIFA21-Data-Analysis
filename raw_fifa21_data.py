@@ -40,7 +40,7 @@ raw_data['Joined Day'] = raw_data['Joined'].str[4:].astype(int)
 raw_data.drop('Joined', axis=1, inplace=True)
 
 # --- Q3 --- #
-
+raw_data[['Value','Wage','Release Clause']]
 
 
 
