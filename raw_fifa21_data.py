@@ -40,7 +40,16 @@ raw_data['Joined Day'] = raw_data['Joined'].str[4:].astype(int)
 raw_data.drop('Joined', axis=1, inplace=True)
 
 # --- Q3 --- #
-raw_data[['Value','Wage','Release Clause']]
+edit_data = raw_data[['Value','Wage','Release Clause']]
 
+def removeSigns(data):
+    value =  data.replace('€','')
+    multi = 1
+    if data[-1] == 'K':
+        multi = 1000
+    elif data[-1] == 'M':
+        multi = 1000000
+    real_value = value[:-1] if value.endswith(('K', 'M')) else value[:]
+    return int(float(real_value) * multi)
 
-
+raw_data[['Value','Wage','Release Clause']] = edit_data.applymap(removeSigns)
