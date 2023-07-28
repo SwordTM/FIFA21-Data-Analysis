@@ -79,3 +79,5 @@ raw_data['Team'] = raw_data['Team & Contract'].astype(str).str.slice_replace(sta
 raw_data['Contract'] = raw_data['Team & Contract'].astype(str).str.slice(start=-11)
 raw_data['Contract Start'] = raw_data['Contract'].astype(str).str.split().str[0]
 raw_data['Contract End'] = raw_data['Contract'].astype(str).str.split().str[2]
+
+# --- EDA --- #
