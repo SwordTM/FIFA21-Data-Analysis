@@ -69,18 +69,13 @@ raw_data['Hits'] = pd.to_numeric(raw_data['Hits'].astype(str).str.strip('\n'))
 raw_data['Hits'].iloc[kValues] = raw_data['Hits'].iloc[kValues] * 1000
 
 # --- Q5 --- #
-edited_data = raw_data.copy()
-edited_data['Team & Contract'].iloc[99]
-edited_data['Contract'].iloc[18970]
-edited_data['Team'].iloc[99]
 
 # Strip the left then the right newline characters
-edited_data['Team & Contract'] = edited_data['Team & Contract'].astype(str).str.lstrip('\n')
-edited_data['Team & Contract'] = edited_data['Team & Contract'].astype(str).str.rstrip('\n')
+raw_data['Team & Contract'] = raw_data['Team & Contract'].astype(str).str.lstrip('\n')
+raw_data['Team & Contract'] = raw_data['Team & Contract'].astype(str).str.rstrip('\n')
 
-# Split the Team and Contract lenght into seperate columns
-teams, contract = edited_data['Team & Contract'].astype(str).str.split('\n')
-edited_data['Team'] = edited_data['Team & Contract'].astype(str).str.slice_replace(start=-11, repl='').str.rstrip('\n')
-edited_data['Contract'] = edited_data['Team & Contract'].astype(str).str.slice(start=-11)
-edited_data['Contract Start'] = edited_data['Contract'].astype(str).str.split().str[0]
-edited_data['Contract End'] = edited_data['Contract'].astype(str).str.split().str[2]
+# Split the Team and Contract length into seperate columns
+raw_data['Team'] = raw_data['Team & Contract'].astype(str).str.slice_replace(start=-11, repl='').str.rstrip('\n')
+raw_data['Contract'] = raw_data['Team & Contract'].astype(str).str.slice(start=-11)
+raw_data['Contract Start'] = raw_data['Contract'].astype(str).str.split().str[0]
+raw_data['Contract End'] = raw_data['Contract'].astype(str).str.split().str[2]
