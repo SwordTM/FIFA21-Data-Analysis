@@ -53,3 +53,17 @@ def removeSigns(data):
     return int(float(real_value) * multi)
 
 raw_data[['Value','Wage','Release Clause']] = edit_data.applymap(removeSigns)
+
+# --- Q4 --- #
+# Identify the values that have a K at the end
+kValues = raw_data['Hits'].loc[raw_data['Hits'].astype(str).str.contains('K')]
+kValues = kValues.index
+
+# Strip the K
+raw_data['Hits'].iloc[kValues] = raw_data['Hits'].iloc[kValues].astype(str).str.strip('K')
+
+# Strip the \n from all
+raw_data['Hits'] = pd.to_numeric(raw_data['Hits'].astype(str).str.strip('\n'))
+
+# Multipy by 1000 for the values that were more than 1000
+raw_data['Hits'].iloc[kValues] = raw_data['Hits'].iloc[kValues] * 1000
